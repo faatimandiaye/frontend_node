@@ -10,10 +10,9 @@ const Inscription = () => {
   const [ password , setPassword ] = useState('');
   const [ prenom , setPrenom ] = useState('');
   const [ nom , setNom ] = useState('');
-  const navigate = useNavigate();
-
-  
-  // la logique
+  const [ showPassword, setShowpassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const Register = async (e) => {
       e.preventDefault();
@@ -22,40 +21,37 @@ const Inscription = () => {
             alert("Veuillez remplir tous les champs");
             return;
         }
-
-        const data = {
-            prenom: prenom,
-            nom: nom,
-            email: email,
-            password: password
-        };
-
+        setLoading(true)
+        const toastId = toast.loading('Creation de compte...')
+  
         try {
-            const response = await fetch("http://localhost:3000/api/auth/inscription", {
+            const response = await fetch("https://backend-node-udx0.onrender.com/api/auth/inscription", {
+            //const response = await fetch("http://localhost:3000/api/auth/inscription", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
+                headers: {'Content-Type': 'application/json'  },
+                body: JSON.stringify({ prenom, nom, email, password }),
+            })
 
-            const result = await response.json();
-            console.log(result);
+            const result = await response.json()
 
             if (response.ok) {
-                alert("Inscription réussie ✔️ Vous pouvez maintenant vous connecter.");
-                  navigate('/connexion');
+                toast.success('Inscription réussie ✔️ Bienvenue !', { id: toastId })
+                  navigate('/connexion')
                 
             } else {
-                alert(result.message || "Erreur lors de l'inscription");
+                alert(result.message || "Erreur lors de l'inscription", {id: toastId })
             }
 
         } catch (error) {
-            console.error(error);
-            alert("Erreur serveur. Veuillez réessayer.");
+            console.error(error)
+            toast.error('Erreur serveur. Veuillez réessayer.', { id: toastId })
+        } finally {
+            setLoading(false)
         }
+     }
 
-  }
+     const inputClass = 
+     ''
 
 
   return (

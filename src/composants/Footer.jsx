@@ -15,11 +15,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold">F</span>
+                <span className="text-white font-bold">MS</span>
               </div>
-              <span className="font-extrabold text-xl text-slate-900 tracking-tight">
-                Fatima
-                <span className="text-blue-600">Dev</span>
+              <span className="font-extrabold text-xl text-white text-tracking-tight">
+                Mini Stack
+                <span className="text-blue-600">Overflow</span>
               </span>
             </div>
             <p className="text-gray-400 text-sm">

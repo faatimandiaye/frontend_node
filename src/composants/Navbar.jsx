@@ -36,9 +36,9 @@ const Navbar = () => {
             <span className="text-lg font-bold"></span>
           </div>
 
-          <span className="font-extrabold text-xl text-slate-900 tracking-tight">
-            Fatima
-            <span className="text-blue-600">Dev</span>
+          <span className="font-extrabold text-xl text-white tracking-tight">
+             Mini Stack  
+            <span className="text-blue-600">Overflow</span>
           </span>
         </NavLink>
 

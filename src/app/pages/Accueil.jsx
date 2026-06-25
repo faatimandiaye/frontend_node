@@ -23,7 +23,7 @@ const Accueil = () => {
         <div className="bg-gray-100 py-20 from-indigo-100 to-indigo-300">
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                    Bienvenue sur <span className="text-indigo-600">FatimaDev</span>
+                    Bienvenue sur <span className="text-indigo-600">Mini Stack Overflow</span>
                 </h1>
                 <p className="text-lg text-gray-600 mb-8">
                     Posez vos questions, partagez vos connaissances et connectez-vous avec d'autres développeurs.
