@@ -21,9 +21,9 @@ const Questions = () => {
     },
     {
       id: 3,
-      titre: "Comment connecter Spring Boot à une base de données MySQL ?",
+      titre: "Comment connecter Node.js à MongoDB avec Mongoose ?",
       description:
-        "Mon application Spring Boot ne parvient pas à se connecter à MySQL.",
+        "Mon application Node.js ne parvient pas à se connecter à MongoDB.",
       heure: "11:45",
       auteur: "Fatou Sow",
     },
@@ -46,10 +46,12 @@ const Questions = () => {
   ];
 
   return (
-    <div className="w-full p-10">
-      <h1 className="text-3xl font-bold mb-6">Les questions</h1>
+    <div className="max-w-7xl mx-auto py-8">
+      <h2 className="text-3xl font-bold text-slate-800 mb-6">
+        Les questions récentes
+      </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         {questions.map((question) => (
           <QuestionCard
             key={question.id}

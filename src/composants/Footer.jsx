@@ -2,31 +2,34 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
-  const year = new Date().getFullYear();
-  return (
-    <footer className="bg-gray-800 text-white py-4">
-      <div className="container mx-auto text-center">
+  const year = new Date().getFullYear()
 
-       {/* Grille principale */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  return (
+    <footer className="bg-gray-900 text-white mt-16 py-10">
+      <div className="container mx-auto px-6">
+
+        {/* Grille principale */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {/* Brand */}
-
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold">MS</span>
               </div>
-              <span className="font-extrabold text-xl text-white text-tracking-tight">
+
+              <span className="font-extrabold text-xl text-white tracking-tight">
                 Mini Stack
-                <span className="text-blue-600">Overflow</span>
+                <span className="text-blue-500">Overflow</span>
               </span>
             </div>
-            <p className="text-gray-400 text-sm">
-              La plateforme de développement web et mobile pour tous vos besoins. Nous offrons des solutions innovantes &amp; personnalisées pour aider votre entreprise à prospérer dans le monde numérique.
 
-           
+            <p className="text-gray-400 text-sm">
+              Mini Stack Overflow est une plateforme où les développeurs peuvent
+              poser des questions techniques, partager leurs connaissances et
+              aider la communauté grâce aux réponses et aux votes.
             </p>
+
             {/* Réseaux sociaux */}
             <div className="flex items-center gap-4">
               {[
@@ -34,7 +37,7 @@ const Footer = () => {
                   label: 'Github',
                   icon: (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.848 8.207 11.628v-8.203h-2.58v-3.622h2.58v-2.697c0-2.67 1.594-4.191 4.097-4.191 1.163 0 2.287 .395 3.217 1.095l2.49 -2.39c-1.54-.947-3.345-1.507-5.307-1.507z"/>
+                      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                     </svg>
                   ),
                 },
@@ -42,7 +45,7 @@ const Footer = () => {
                   label: 'Twitter',
                   icon: (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.611 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39 .045 .765 .127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424 .729-.666 1.577-.666 2.476 0 1.708 .87 3.216 2.188 4.099-.807-.026-1.566-.247-2.229-.616v"/>
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                   ),
                 },
@@ -50,96 +53,96 @@ const Footer = () => {
                   label: 'LinkedIn',
                   icon: (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75 .784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.062-1.867-3.062s-2.154 1.459-2.154 2.965v5.701h-3v-10h2.881v1.367h .041c .401-.762 1.381-1.566 2.846-1.566 3.042 0 3.603 2 .4036 4z"/>
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.062-1.867-3.062s-2.154 1.459-2.154 2.965v5.701h-3v-10h2.881v1.367h.041c.401-.762 1.381-1.566 2.846-1.566 3.042 0 3.603 2.004 3.603 4.604v5.595z"/>
                     </svg>
                   ),
                 },
               ].map(({ label, icon }) => (
-                <button
+                <a
                   key={label}
-                  aria-label={label}
+                  href="#"
                   className="text-gray-400 hover:text-white transition-colors duration-300"
+                  aria-label={label}
                 >
                   {icon}
-                </button>
+                </a>
               ))}
-          </div>
             </div>
+          </div>
+
           {/* Navigation */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Navigation</h3>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Navigation</h3>
+
             <ul className="space-y-2">
-              {[
-                { to: '/', label: 'Accueil' },
-                { to: '/Profil', label: 'Mon profil' },
-                { to: '/ajouter_question', label: 'Ajouter une question' },
-              ].map(({ to, label }) => (
-                <li key={to}>
-                  <NavLink 
-                  to={to} 
-                  className="text-gray-400 hover:text-white transition-colors duration-300">
-                    {label}
-                  </NavLink>
-                </li>
-              ))}
+              <li>
+                <NavLink to="/" className="text-gray-400 hover:text-white">
+                  Accueil
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/profil" className="text-gray-400 hover:text-white">
+                  Mon profil
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/ajouter_question" className="text-gray-400 hover:text-white">
+                  Ajouter une question
+                </NavLink>
+              </li>
             </ul>
           </div>
-          {/* compte */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Compte</h3>
+
+          {/* Compte */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Compte</h3>
+
             <ul className="space-y-2">
-              {[
-                { to: '/connexion', label: 'Connexion' },
-                { to: '/inscription', label: 'Inscription' },
-              ].map(({ to, label }) => (
-                <li key={to}>
-                  <NavLink 
-                  to={to} 
-                  className="text-gray-400 hover:text-white transition-colors duration-300">
-                    {label}
-                  </NavLink>
-                </li>
-              ))}
+              <li>
+                <NavLink to="/connexion" className="text-gray-400 hover:text-white">
+                  Connexion
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/inscription" className="text-gray-400 hover:text-white">
+                  Inscription
+                </NavLink>
+              </li>
             </ul>
           </div>
+
           {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contact</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 12.713l-11.989 8.573 11.989-3.404 11.989 3.404-11.989-8.573zm0-3.404l-11.989-8.573 11.989 3.404 11.989-3.404-11.989 8.573z"/>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact</h3>
 
-                </svg>
-                  contact@votresite.com
-              </li>
-              <li className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-1.977 1.977a1 1 0 01-1.414.054L2.036 8.65a1 1 0 01-.366-.79l.366-3.78z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5a2 2 0 012-2h2a2 2 0 012 2v5a2 2 0 01-2 2h-2a2 2 0 01-2-2V5z"/>
-                </svg>
-                Dakar, Sénégal
-              </li>
+            <ul className="space-y-3 text-gray-400">
+              <li>📧 contact@ministackoverflow.com</li>
+              <li>📍 Dakar, Sénégal</li>
             </ul>
           </div>
+
         </div>
 
-        {/*--Separateur + Copyright--*/}
-        <div className="mt-8 border-t border-gray-700 pt-4 text-gray-400 text-sm">
-          <p className="text-slate-400 text-sm">
-            {year}{''}
-            <span className="text-gray-400 fron-semibold">faDev</span>. 
-            Tous droits réservés.
+        {/* Copyright */}
+        <div className="mt-10 border-t border-gray-700 pt-6 text-center">
+          <p className="text-gray-400 text-sm">
+            © {year}{' '}
+            <span className="font-semibold text-white">
+              Mini Stack Overflow
+            </span>
+            . Tous droits réservés.
           </p>
-          <div className="flex items-center justify-center gap-2 mt-2">
-            <span className="text-gray-400 fron-semibold">faDev</span>
-            <span >au senegal</span>
-          </div>
-        </div>
-      </div>
 
+          <p className="text-gray-500 text-sm mt-2">
+            Développé au Sénégal 🇸🇳
+          </p>
+        </div>
+
+      </div>
     </footer>
- 
   )
 }
 

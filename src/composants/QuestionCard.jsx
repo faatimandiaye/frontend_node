@@ -1,13 +1,28 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 const QuestionCard = ({ question }) => {
   return (
-    <div className="border rounded-lg p-4 shadow">
-      <h2 className="text-xl font-semibold">{question.titre}</h2>
-      <p className="text-gray-600 mt-2">{question.description}</p>
+    <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition duration-300">
+      <h3 className="text-xl font-semibold text-indigo-600 mb-3">
+        {question.titre}
+      </h3>
 
-      <div className="flex justify-between mt-4 text-sm text-gray-500">
-        <span>{question.auteur}</span>
-        <span>{question.heure}</span>
+      <p className="text-gray-600 mb-4">
+        {question.description}
+      </p>
+
+      <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+        <span>👤 {question.auteur}</span>
+        <span>🕒 {question.heure}</span>
       </div>
+
+      <Link
+        to={`/detail/${question.id}`}
+        className="text-indigo-600 font-medium hover:underline"
+      >
+        Voir les détails →
+      </Link>
     </div>
   );
 };
