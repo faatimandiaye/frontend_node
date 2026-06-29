@@ -16,12 +16,12 @@ const App = () => {
       path:'/',
       element:<UserLayout/>,
       children :[
-        {path:'/' , element:<Accueil/>},
-        {path:'/connexion' , element:<Connexion/>},
-        {path:'/inscription' , element:<Inscription/>},
-        {path:'/profil' , element:<Profil/>},
-        {path:'/ajouter_question' , element:<QuestionForm/>},
-        {path:'/detail:id' , element:<Detail/>},
+        {path:'/' , element:<Accueil /> },
+        {path:'/connexion' , element:<Connexion /> },
+        {path:'/inscription' , element:<Inscription /> },
+        {path:'/profil' , element:<Profil /> },
+        {path:'/ajouter_question' , element:<QuestionForm /> },
+        {path:'/detail:id' , element:<Detail /> },
       ]
     }
   ])
