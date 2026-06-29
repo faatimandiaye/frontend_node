@@ -2,12 +2,12 @@ import { useState, useRef } from 'react';
 
 
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:3000';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 // Données de démo — à remplacer par les vraies données de ton contexte auth
 const MOCK_USER = {
-  name: 'Florence Diedhiou',
-  email: 'florence@example.com',
+  name: 'Fitamatou',
+  email: 'fatimatou@example.com',
   bio: "Passionnée d'entraide et de partage de connaissances. J'aime aider sur les sujets liés au développement web.",
   joinedAt: '2024-03-12',
   photo: '',   // URL de la photo, vide = affiche les initiales
@@ -152,12 +152,12 @@ const Profil = () => {
                   )}
 
                   {/* Overlay au survol */}
-                  <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     {photoLoading
                       ? <Loader2 size={20} className="text-white animate-spin" />
                       : <Camera size={20} className="text-white" />
                     }
-                  </div>
+                  </div> */}
                 </button>
 
                 {/* Input file caché */}

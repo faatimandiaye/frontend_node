@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
-const API_URL = 'http://localhost:3000/api/questions';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 
 //  Si ta page de connexion stocke le token sous une autre clé que "token"
 // (ex: "accessToken"), change uniquement cette ligne :
@@ -16,7 +17,7 @@ const QuestionForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!titre.trim() || !description.trim()) {
+    if(!titre.trim() || !description.trim()) {
       setStatus('error');
       setErrorMessage('Le titre et la description sont obligatoires.');
       return;
@@ -33,14 +34,17 @@ const QuestionForm = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ titre, description }),
-      });
+      const response = await fetch(`${API_URL}/api/questions`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+  body: JSON.stringify({
+    titre,
+    description,
+  }),
+});
 
       const data = await response.json();
 
