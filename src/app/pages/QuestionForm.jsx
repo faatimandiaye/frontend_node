@@ -31,18 +31,13 @@ const QuestionForm = () => {
     setErrorMessage("");
 
     try {
-      console.log("API :", `${API_URL}/api/questions`);
-
       const response = await fetch(`${API_URL}/api/questions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          titre,
-          description,
-        }),
+        body: JSON.stringify({ titre, description }),
       });
 
       const text = await response.text();
@@ -66,7 +61,7 @@ const QuestionForm = () => {
       <div className="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow">
 
         <h1 className="text-2xl font-bold mb-6">
-          Poser une question
+          <span>Poser une question</span>
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -89,14 +84,14 @@ const QuestionForm = () => {
           {status === "error" && (
             <div className="bg-red-100 text-red-700 p-3 rounded mb-4 flex gap-2">
               <AlertCircle size={18} />
-              {errorMessage}
+              <span>{errorMessage}</span>
             </div>
           )}
 
           {status === "success" && (
             <div className="bg-green-100 text-green-700 p-3 rounded mb-4 flex gap-2">
               <CheckCircle2 size={18} />
-              Question publiée avec succès.
+              <span>Question publiée avec succès.</span>
             </div>
           )}
 
@@ -108,10 +103,10 @@ const QuestionForm = () => {
             {status === "loading" ? (
               <>
                 <Loader2 className="animate-spin inline mr-2" size={18} />
-                Publication...
+                <span>Publication...</span>
               </>
             ) : (
-              "Publier la question"
+              <span>Publier la question</span>
             )}
           </button>
 

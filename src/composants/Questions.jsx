@@ -1,49 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import QuestionCard from "./QuestionCard";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const Questions = () => {
-  const questions = [
-    {
-      id: 1,
-      titre: "Comment utiliser useEffect dans React pour récupérer des données ?",
-      description:
-        "Je débute avec React et je souhaite récupérer des données depuis une API avec useEffect.",
-      heure: "09:15",
-      auteur: "Aminata Ndiaye",
-    },
-    {
-      id: 2,
-      titre: "Pourquoi mon serveur Express retourne une erreur 404 ?",
-      description:
-        "J'ai créé une route GET /users mais lorsque je fais une requête depuis Postman, je reçois une erreur 404.",
-      heure: "10:30",
-      auteur: "Mamadou Diallo",
-    },
-    {
-      id: 3,
-      titre: "Comment connecter Node.js à MongoDB avec Mongoose ?",
-      description:
-        "Mon application Node.js ne parvient pas à se connecter à MongoDB.",
-      heure: "11:45",
-      auteur: "Fatou Sow",
-    },
-    {
-      id: 4,
-      titre: "Quelle est la différence entre let, const et var en JavaScript ?",
-      description:
-        "Je vois souvent ces trois mots-clés dans les exemples JavaScript.",
-      heure: "14:20",
-      auteur: "Cheikh Ba",
-    },
-    {
-      id: 5,
-      titre: "Comment créer une authentification JWT avec Node.js ?",
-      description:
-        "Je développe une API avec Express et je souhaite sécuriser mes routes avec JWT.",
-      heure: "16:05",
-      auteur: "Khadija Fall",
-    },
-  ];
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [erreur, setErreur] = useState(false);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/questions`);
+        if (!response.ok) throw new Error("Erreur serveur");
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error(error);
+        setErreur(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  if (loading) return <p className="text-slate-500 text-center">Chargement...</p>;
+  if (erreur) return <p className="text-red-500 text-center">Erreur lors du chargement des questions.</p>;
 
   return (
     <div className="max-w-7xl mx-auto py-8">
@@ -53,10 +37,7 @@ const Questions = () => {
 
       <div className="space-y-5">
         {questions.map((question) => (
-          <QuestionCard
-            key={question.id}
-            question={question}
-          />
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </div>

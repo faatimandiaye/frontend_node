@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-
-
+import { Pencil, X, Save, MessageCircleQuestion, MessageSquareReply, ThumbsUp, Award } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -54,7 +53,6 @@ const Profil = () => {
   const repStyle = REPUTATION_STYLES[user.stats.reputation] ?? REPUTATION_STYLES['Nouveau membre'];
   const joinedLabel = new Date(user.joinedAt).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
 
-  // Gestion de la photo 
   const handlePhotoClick = () => {
     if (!photoLoading) fileInputRef.current?.click();
   };
@@ -63,7 +61,6 @@ const Profil = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Vérification côté client
     const allowed = ['image/jpeg', 'image/png', 'image/webp'];
     if (!allowed.includes(file.type)) {
       setPhotoError('Format non supporté. Utilisez JPG, PNG ou WebP.');
@@ -92,32 +89,27 @@ const Profil = () => {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
-        // ⚠️ Ne pas mettre Content-Type ici : le navigateur le gère automatiquement avec FormData
       });
 
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.message || 'Erreur lors de la mise à jour.');
 
-      // Mettre à jour l'affichage avec la nouvelle photo
       setUser((prev) => ({ ...prev, photo: `${API_URL}${data.photo}` }));
     } catch (err) {
       setPhotoError(err.message || 'Impossible de changer la photo. Réessaie.');
     } finally {
       setPhotoLoading(false);
-      // Reset l'input pour pouvoir re-sélectionner le même fichier
       e.target.value = '';
     }
   };
 
-  //  Gestion du formulaire d'édition 
   const startEditing = () => {
     setFormData({ name: user.name, bio: user.bio, email: user.email });
     setIsEditing(true);
   };
   const cancelEditing = () => setIsEditing(false);
   const saveChanges = () => {
-    // TODO: brancher l'appel API ici (ex: await fetchApi('/api/auth/profil', { method: 'PUT', ... }))
     setUser((prev) => ({ ...prev, ...formData }));
     setIsEditing(false);
   };
@@ -126,12 +118,10 @@ const Profil = () => {
     <div className="min-h-screen w-full bg-gray-50 px-4 py-10">
       <div className="mx-auto max-w-3xl space-y-6">
 
-        {/* Carte profil */}
         <div className="rounded-2xl bg-white p-6 shadow-sm">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">
 
-              {/* Avatar cliquable */}
               <div className="relative group">
                 <button
                   onClick={handlePhotoClick}
@@ -150,17 +140,8 @@ const Profil = () => {
                       {getInitials(user.name)}
                     </div>
                   )}
-
-                  {/* Overlay au survol */}
-                  {/* <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {photoLoading
-                      ? <Loader2 size={20} className="text-white animate-spin" />
-                      : <Camera size={20} className="text-white" />
-                    }
-                  </div> */}
                 </button>
 
-                {/* Input file caché */}
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -200,7 +181,6 @@ const Profil = () => {
             )}
           </div>
 
-          {/* Message d'erreur photo */}
           {photoError && (
             <p className="mt-2 text-xs text-red-500">{photoError}</p>
           )}
@@ -230,7 +210,6 @@ const Profil = () => {
           <p className="mt-4 text-xs text-gray-400">Membre depuis {joinedLabel}</p>
         </div>
 
-        {/* Stats */}
         <div>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">Activité</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">

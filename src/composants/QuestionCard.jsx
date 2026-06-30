@@ -13,12 +13,12 @@ const QuestionCard = ({ question }) => {
       </p>
 
       <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-        <span>👤 {question.auteur}</span>
-        <span>🕒 {question.heure}</span>
+        <span>👤 {question.auteur?.nom || "Anonyme"}</span>
+        <span>🕒 {new Date(question.createdAt).toLocaleTimeString()}</span>
       </div>
 
       <Link
-        to={`/detail/${question.id}`}
+        to={`/detail/${question._id}`}
         className="text-indigo-600 font-medium hover:underline"
       >
         Voir les détails →

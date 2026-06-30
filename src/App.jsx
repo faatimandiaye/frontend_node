@@ -21,7 +21,7 @@ const App = () => {
         {path:'/inscription' , element:<Inscription /> },
         {path:'/profil' , element:<Profil /> },
         {path:'/ajouter_question' , element:<QuestionForm /> },
-        {path:'/detail:id' , element:<Detail /> },
+        {path:'/detail/:id' , element:<Detail /> },
       ]
     }
   ])
