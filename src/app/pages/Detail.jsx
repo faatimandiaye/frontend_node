@@ -66,6 +66,54 @@ const Detail = () => {
     fetchReponses();
   }, [id]);
 
+  const handleVoteQuestion = async (value) => {
+    if (!token) {
+      setActionError("Tu dois être connecté pour voter.");
+      return;
+    }
+    try {
+      const response = await fetch(`${API_URL}/api/questions/${id}/vote`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ value }),
+      });
+      if (!response.ok) throw new Error("Échec du vote");
+      const data = await response.json();
+      setQuestion((prev) => ({ ...prev, votes: data.votes ?? (prev.votes ?? 0) + value }));
+    } catch (error) {
+      setActionError(error.message);
+    }
+  };
+
+  const handleVoteReponse = async (reponseId, value) => {
+    if (!token) {
+      setReponseError("Tu dois être connecté pour voter.");
+      return;
+    }
+    try {
+      const response = await fetch(`${API_URL}/api/questions/${id}/reponses/${reponseId}/vote`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ value }),
+      });
+      if (!response.ok) throw new Error("Échec du vote");
+      const data = await response.json();
+      setReponses((prev) =>
+        prev.map((r) =>
+          r._id === reponseId ? { ...r, votes: data.votes ?? (r.votes ?? 0) + value } : r
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleDelete = async () => {
     if (!window.confirm("Supprimer cette question définitivement ?")) return;
     try {
@@ -215,7 +263,25 @@ const Detail = () => {
           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
             <span>Posée par {question.auteur?.nom || "Anonyme"}</span>
             <span>{new Date(question.createdAt).toLocaleString()}</span>
-            <span>{question.votes ?? 0} votes</span>
+            <span className="inline-flex items-center gap-2">
+              <button
+                onClick={() => handleVoteQuestion(1)}
+                className="w-7 h-7 flex items-center justify-center rounded-full border border-slate-200 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-colors"
+                aria-label="Voter pour"
+              >
+                ▲
+              </button>
+              <span className="font-semibold text-slate-700 min-w-[1.5rem] text-center">
+                {question.votes ?? 0}
+              </span>
+              <button
+                onClick={() => handleVoteQuestion(-1)}
+                className="w-7 h-7 flex items-center justify-center rounded-full border border-slate-200 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
+                aria-label="Voter contre"
+              >
+                ▼
+              </button>
+            </span>
           </div>
 
           {estAuteur && !isEditing && (
@@ -267,18 +333,39 @@ const Detail = () => {
         ) : (
           <div className="space-y-4">
             {reponses.map((reponse) => (
-              <div key={reponse._id} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <p className="text-slate-600 leading-relaxed mb-4">{reponse.contenu}</p>
-                <div className="flex items-center justify-between text-sm text-slate-500">
-                  <span>Par {reponse.auteur?.nom || "Anonyme"} — {new Date(reponse.createdAt).toLocaleString()}</span>
-                  {userId && reponse.auteur?._id === userId && (
-                    <button
-                      onClick={() => handleDeleteReponse(reponse._id)}
-                      className="text-red-500 hover:text-red-700 text-xs font-semibold"
-                    >
-                      Supprimer
-                    </button>
-                  )}
+              <div key={reponse._id} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex gap-4">
+                <div className="flex flex-col items-center gap-1 shrink-0">
+                  <button
+                    onClick={() => handleVoteReponse(reponse._id, 1)}
+                    className="w-7 h-7 flex items-center justify-center rounded-full border border-slate-200 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-colors"
+                    aria-label="Voter pour"
+                  >
+                    ▲
+                  </button>
+                  <span className="font-semibold text-slate-700 text-sm">
+                    {reponse.votes ?? 0}
+                  </span>
+                  <button
+                    onClick={() => handleVoteReponse(reponse._id, -1)}
+                    className="w-7 h-7 flex items-center justify-center rounded-full border border-slate-200 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
+                    aria-label="Voter contre"
+                  >
+                    ▼
+                  </button>
+                </div>
+                <div className="flex-1">
+                  <p className="text-slate-600 leading-relaxed mb-4">{reponse.contenu}</p>
+                  <div className="flex items-center justify-between text-sm text-slate-500">
+                    <span>Par {reponse.auteur?.nom || "Anonyme"} — {new Date(reponse.createdAt).toLocaleString()}</span>
+                    {userId && reponse.auteur?._id === userId && (
+                      <button
+                        onClick={() => handleDeleteReponse(reponse._id)}
+                        className="text-red-500 hover:text-red-700 text-xs font-semibold"
+                      >
+                        Supprimer
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
