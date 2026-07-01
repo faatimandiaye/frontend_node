@@ -6,8 +6,9 @@ const TOKEN_KEY = "token";
 
 const QuestionForm = () => {
   const [titre, setTitre] = useState("");
-  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("idle");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -37,7 +38,7 @@ const QuestionForm = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ titre, description }),
+        body: JSON.stringify({ titre, description ,tags}),
       });
 
       const text = await response.text();
@@ -49,6 +50,7 @@ const QuestionForm = () => {
 
       setTitre("");
       setDescription("");
+      setTags("");
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -80,6 +82,13 @@ const QuestionForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+            <input
+            className="w-full border rounded p-3 mb-4"
+            placeholder="tags"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+          />
+
 
           {status === "error" && (
             <div className="bg-red-100 text-red-700 p-3 rounded mb-4 flex gap-2">
