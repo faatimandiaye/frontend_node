@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { fetchApi, readApiResponse } from '../../config/api'
+const API_URL= import.meta.env.VITE_API_URL
 
 const Connexion = () => {
   const [email, setEmail] = useState('')
@@ -22,7 +23,7 @@ const Connexion = () => {
     try {
       console.log('Données envoyées :', { email, password })
 
-      const response = await fetch('https://backend-node-udx0.onrender.com/api/auth/connexion', {
+      const response = await fetch(`${API_URL}/api/auth/connexion`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+const API_URL= import.meta.env.VITE_API_URL
 
 const Inscription = () => {
   const [email, setEmail] = useState('')
@@ -25,7 +26,7 @@ const Inscription = () => {
 
     try {
       const response = await fetch(
-        'https://backend-node-udx0.onrender.com/api/auth/inscription',
+        `${API_URL}/api/auth/inscription`,
         {
           method: 'POST',
           headers: {
